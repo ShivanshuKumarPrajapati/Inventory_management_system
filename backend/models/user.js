@@ -47,6 +47,10 @@ userSchema.methods = {
          } catch (error) {
            return "";
          }
+    },
+
+    Authenticate: function (plainpassword) {
+        return this.encry_password === this.securePassword(plainpassword);
     }
 }
 
