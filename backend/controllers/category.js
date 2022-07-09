@@ -1,4 +1,5 @@
 const Category = require('./../models/category');
+const Product = require('./../models/product');
 const { validationResult } = require('express-validator');
 
 exports.getCategoryId = (req, res, next, id) => {
@@ -77,12 +78,41 @@ exports.updateCategory = (req, res) => {
 exports.removeCategory = (req, res) => {
     
     const category = req.category;
+    const id = req.category._id;
+    
     category.remove((err, updatedCategory) => {
       if (err) {
         return res.status(400).json({
           error: "Failed to delete category",
         });
       }
+        
+
+    //same category product deletion
+
+    Product.find().exec((err, product) => {
+    if (err) {
+        return res.status(500).json({
+        mssg: "Server error",
+        error: err,
+        });
+    }
+
+    product.map((item) => {
+        if (item.category.equals(id)) {
+        item.remove((err, updatedProduct) => {
+            if (err) {
+            return res.status(404).json({
+                mssg: "Unable to remove Product of given category",
+                error: err,
+            });
+            }
+        });
+        }
+    });
+    });
+
+        
       res.json({
         mssg: "Successfully deleted",
       });
