@@ -37,6 +37,6 @@ router.post("/signin", [
     signinUser);
 
 
-router.get('signout', signout);
+router.get('/signout', signout);
 
 module.exports = router;

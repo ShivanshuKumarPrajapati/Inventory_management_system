@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minlength: 3
     },
-    gmail: {
+    email: {
         type: String,
         required: true,
         unique: true,
@@ -28,8 +28,8 @@ const userSchema = new mongoose.Schema({
 userSchema.virtual('password')
     .set(function (plainpassword) {
         this._password = plainpassword,
-        this.salt = uuid();
-        this.encry_password = securePassword(plainpassword);
+        this.salt = uuidv4();
+        this.encry_password = this.securePassword(plainpassword);
     })
     .get(function () {
         return this._password;
