@@ -1,0 +1,83 @@
+.authParent{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border:2px solid black;
+    width: 25%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px black;
+    
+}
+
+.authHeader{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    background-color: black;
+}
+
+.text{
+    display: inline;
+    color: white;
+    padding:.3em;
+    box-shadow: 1px 0.1px 0.1em 0px grey;
+    width:50%;
+    text-align: center;
+    margin: 0;
+    border-radius: 5px;
+    cursor:pointer;
+    font-size: xx-large;
+    font-weight: bolder;
+    word-wrap: break-word;
+}
+
+.border{
+    border-bottom:4px solid rgb(240, 240, 240); 
+}
+
+.authInput{
+    margin: 8px 2px;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 5px;
+    padding:2px;
+    height: 45px;
+}
+
+.authForm{
+    margin:15px 4px 20px 4px;
+}
+
+.authInput:focus{
+    outline: none;
+}
+
+.authBtn{
+    border:2px solid black;
+    width: 5em;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: larger;
+    text-align: center;
+    display: block;
+    margin: auto;
+    margin-top: 1em;
+    box-shadow: 1px 1px 3px .1px black;
+
+}
+
+@media screen and (max-width:950px) {
+    .authParent{
+        width: 39%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .authParent{
+        width: 55% ;
+        height: auto;
+    }
+}
