@@ -5,15 +5,16 @@ const fs = require("fs");
 
 exports.getProductId = (req, res, next, id) => {
     
-    Product.findById(id).exec((err, product) => {
+  Product.findById(id)
+    .populate('category')
+    .exec((err, product) => {
         if (err) {
             return res.status(400).json({
-                mssg: "Product not FOUND",
-                error: err
+                error: "Product not FOUND",
             });
         }
 
-        req.product = product;
+      req.product = product;
         next();
     });
 }
@@ -78,7 +79,8 @@ exports.getProduct = (req, res) => {
   return res.json(req.product);
 };
 
-exports.photo = (req, res,next) => {
+exports.photo = (req, res, next) => {
+  console.log('photo');
      if (req.product.photo.data) {
        res.set("Content-Type", req.product.photo.contentType);
        return res.send(req.product.photo.data);
@@ -91,11 +93,11 @@ exports.getAllProduct = (req, res) => {
 
   Product.find()
     .select("-photo")
+    .populate('category')
     .exec((err, products) => {
       if (err) {
         return res.status(400).json({
-          mssg: "Unable to access product from DB",
-          error: err,
+          error: "Unable to access product from DB"
         });
       }
       res.json(products);
@@ -112,7 +114,7 @@ exports.removeProduct = (req, res) => {
     }
 
     res.status(200).json({
-      mssg: "Product deleted successfullu"
+      mssg: "Product deleted successfully"
     });
   });
 };

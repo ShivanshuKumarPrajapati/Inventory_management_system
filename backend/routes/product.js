@@ -25,9 +25,7 @@ router.get(
 );
 
 router.get(
-  "/product/photo/:productId/:userId",
-  isSignedIn,
-  isAuthenticated,
+  "/photo/product/:productId",
   photo
 );
 
