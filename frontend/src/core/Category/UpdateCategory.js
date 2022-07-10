@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import "./AddCategory.css";
 
 import Base from "../../Base";
@@ -18,6 +18,7 @@ const UpdateCategory = () => {
     });
   
   const { categoryId } = useParams();
+  const navigate = useNavigate();
   const { user, token } = isAuthenticated();
 
     const handleChange = (e) => {
@@ -40,7 +41,7 @@ const UpdateCategory = () => {
               setValues({ ...values, error: `${data.error}` });
 
               setTimeout(() => {
-                setValues({ error: "", name: "", description: "" });
+                setValues({ error: ""});
               }, 3000);
            }
            else {
@@ -52,14 +53,15 @@ const UpdateCategory = () => {
 
              setTimeout(() => {
                setValues({ success: false });
-             }, 3000);
+               navigate('/home/category')
+             }, 2000);
            }
          }
        );
     };
   
    const preloadCategory = (categoryId,userId,token) => {
-     getCategory(categoryId,userId,token).then((data) => {
+     getCategory(categoryId, userId, token).then((data) => {
        if (data.error) {
          console.log(data.error);
        } else {
@@ -78,10 +80,10 @@ const UpdateCategory = () => {
 
     const successMessage = () => {
       return (
-        <div className="flex justify-center">
+        <div className="flex justify-center ">
           <div className="w-50">
             <div
-              className="bg-green-100 rounded-lg py-5 px-6 mb-4 text-base text-green-700 mb-3"
+              className="bg-green-100 rounded-lg py-5 px-6 mb-4 text-base text-green-700 mb-0 mt-1"
               role="alert"
               style={{ display: values.success ? "" : "none" }}
             >
@@ -97,7 +99,7 @@ const UpdateCategory = () => {
         <div className="flex justify-center">
           <div className="w-50">
             <div
-              className={`bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-1 mt-2 `}
+              className={`bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-0 mt-1 `}
               role="alert"
               style={{ display: values.error ? "block" : "none" }}
             >

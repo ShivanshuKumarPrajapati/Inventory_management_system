@@ -18,9 +18,13 @@ export const createCategory = (userId, token, category) => {
 };
 
 //get allCategory
-export const getCategories = (userId) => {
+export const getCategories = (userId,token) => {
   return fetch(`${API}/category/all/${userId}`, {
     method: "GET",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
   })
     .then((res) => {
       return res.json();
@@ -64,7 +68,7 @@ export const updateCategory = (categoryId, userId, token, category) => {
 
 //delete category
 export const deleteCategory = (categoryId, userId,token) => {
-  return fetch(`${API}/category/${categoryId}/${userId}`, {
+  return fetch(`${API}/category/delete/${categoryId}/${userId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
