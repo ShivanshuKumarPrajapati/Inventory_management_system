@@ -1,0 +1,29 @@
+.cardParent{
+    align-self: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    border: 2px solid red;
+}
+.Card{
+    height: 250px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px .1px black; 
+    text-align: center;
+    font-family:breeserif;
+}
+.categoryname{
+    margin:0px;
+    background-color: black;
+    font-size: xx-large;
+    color: white;
+}

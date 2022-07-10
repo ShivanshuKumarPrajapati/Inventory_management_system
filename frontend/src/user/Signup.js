@@ -1,11 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import "./AuthPage.css";
 
-import {signup} from './../auth/helper/index'
+import {signup, authenticate,isAuthenticated} from './../auth/helper/index'
+
 
 const Signup = () => {
-
+    const navigate = useNavigate();
+    const { user } = isAuthenticated();
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -23,26 +26,62 @@ const Signup = () => {
 
     const onSubmit = (e) => {
       e.preventDefault();
-        setData({ ...data, error: false });
+        setData({ ...data, error:'' });
         
         const { name, email, password } = data;
 
       signup({ name, email, password })
-        .then((data) => {
-          if (data.error) {
-            setData({ ...data, error: data.error, success: false });
-          } else {
+        .then((res) => {
+          if (res.mssg) {
+            console.log(res.mssg)
             setData({
               ...data,
-              name: "",
-              email: "",
-              password: "",
-              error: "",
-              success: true,
+              error: `${res.mssg}`,
+              success:false
+            })
+
+            setTimeout(() => {
+              setData({
+                name: '',
+                email: '',
+                password:'',
+                error:''
+              })
+            }, 3000);        
+
+          } else {
+
+            authenticate(res, () => {
+              setData({
+                ...data,
+                name: "",
+                email: "",
+                password: "",
+                error: "",
+                success: true,
+              });
             });
+            
+
+            setTimeout(() => {
+              setData({
+                success: ""
+              });
+
+              if(user) {
+              navigate('/home/product');
+              }
+            }, 3000);
           }
         })
-        .catch(console.log("Error in Signup"));
+        .catch(() => {
+          console.log("Error in Signup")
+          setData({
+            email: "",
+            password: "",
+            name:""
+        })
+        });
     };
 
     const successMessage = () => {
@@ -66,9 +105,9 @@ const Signup = () => {
         <div className="flex justify-center">
           <div className="w-50">
             <div
-              className="bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-3"
+              className={`bg-red-100 rounded-lg py-5 px-6 mb-4 text-base text-red-700 mb-1 mt-2 `}
               role="alert"
-              style={{ display: data.error ? "" : "none" }}
+              style={{ display: data.error ? "block" : "none" }}
             >
               {data.error}
             </div>
@@ -114,8 +153,8 @@ const Signup = () => {
           SignUp
         </button>
       </form>
+        </div> 
     );
-        </div>
 }
 
 export default Signup

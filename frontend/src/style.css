@@ -26,7 +26,6 @@
     font-size: large;
     font-weight: bold;
     height: min-content;
-    vertical-align:baseline;
     border:4px solid white;
     margin: auto;
 }
@@ -40,6 +39,6 @@
     display: flex;
     flex-wrap: wrap;;
     justify-content: space-around;
-    align-content: space-around;
+    /* align-content:space-around; */
 }
 
