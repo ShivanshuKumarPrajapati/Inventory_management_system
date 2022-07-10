@@ -1,0 +1,72 @@
+.ProductParent{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    border:2px solid black;
+    width: 35%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px 1px black;
+    
+}
+
+.Producttext{
+    display: inline-block;
+    font-size: xx-large;
+    font-weight: bold;
+    background-color: black;
+    color:white;
+    font-family: Breeserif;
+}
+
+
+
+.ProductInput{
+    margin: 8px 2px;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 5px;
+    padding:2px;
+    height: 45px;
+}
+
+.ProductForm{
+    margin:15px 4px 20px 4px;
+}
+
+.ProductInput:focus{
+    outline: none;
+}
+
+.ProductBtn{
+    border:2px solid black;
+    width: 7em;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: larger;
+    text-align: center;
+    display: block;
+    margin: auto;
+    margin-top: 1em;
+    box-shadow: 1px 1px 3px .1px black;
+
+}
+textarea{
+    resize: none;
+}
+
+@media screen and (max-width:950px) {
+    .ProductParent{
+        width: 50%;
+        height: auto;
+    }
+}
+
+@media screen and (max-width:650px) {
+    .ProductParent{
+        width: 65% ;
+        height: auto;
+    }
+}

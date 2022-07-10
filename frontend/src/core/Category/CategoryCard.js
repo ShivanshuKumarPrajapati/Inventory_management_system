@@ -15,7 +15,6 @@ const CategoryCard = () => {
   const { user, token } = isAuthenticated();
 
   const delCategory = (categoryId) => {
-    console.log(categoryId);
      deleteCategory(categoryId, user._id, token).then((data) => {
        if (data.error) {
          console.log(data.error);

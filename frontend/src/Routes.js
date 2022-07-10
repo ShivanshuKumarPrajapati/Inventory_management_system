@@ -5,6 +5,8 @@ import AuthPage from './user/AuthPage';
 import PrivateRoutes from './auth/helper/PrivateRoute';
 import CheckRoute from './auth/helper/CheckRoute';
 import Product from './core/Product/Product';
+import AddProduct from './core/Product/AddProduct';
+import UpdateProduct from './core/Product/UpdateProduct';
 import AddCategory from './core/Category/AddCategory';
 import Category from "./core/Category/Category"
 import UpdateCategory from './core/Category/UpdateCategory';
@@ -28,6 +30,24 @@ const RouteFxn = () => {
             element={
               <PrivateRoutes>
                 <Product />
+              </PrivateRoutes>
+            }
+          />
+          <Route
+            exact
+            path="/home/product/add"
+            element={
+              <PrivateRoutes>
+                <AddProduct />
+              </PrivateRoutes>
+            }
+          />
+          <Route
+            exact
+            path="/product/update/:productId"
+            element={
+              <PrivateRoutes>
+                <UpdateProduct />
               </PrivateRoutes>
             }
           />
