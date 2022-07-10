@@ -1,10 +1,10 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Base from './Base';
 import AuthPage from './user/AuthPage';
 import PrivateRoutes from './auth/helper/PrivateRoute';
-import Product from './core/Product';
+import Product from './core/Product/Product';
+import AddCategory from './core/Category/AddCategory';
 
 const RouteFxn = () => {
     return (
@@ -17,6 +17,15 @@ const RouteFxn = () => {
             element={
               <PrivateRoutes>
                 <Product />
+              </PrivateRoutes>
+            }
+          />
+          <Route
+            exact
+            path="/home/category/add"
+            element={
+              <PrivateRoutes>
+                <AddCategory />
               </PrivateRoutes>
             }
           />

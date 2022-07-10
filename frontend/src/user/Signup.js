@@ -89,7 +89,7 @@ const Signup = () => {
           <div className="flex justify-center">
             <div className="w-50">
               <div
-                className="bg-greem-100 rounded-lg py-5 px-6 mb-4 text-base text-green-700 mb-3"
+                className="bg-green-100 rounded-lg py-5 px-6 mb-4 text-base text-green-700 mb-3"
                 role="alert"
                 style={{ display: data.success ? "" : "none" }}
               >

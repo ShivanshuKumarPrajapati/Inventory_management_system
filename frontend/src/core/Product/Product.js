@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Base from '../Base'
+import Base from '../../Base'
 import ProductCard from './ProductCard';
 
 
