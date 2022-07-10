@@ -11,8 +11,6 @@ exports.getCategoryId = (req, res, next, id) => {
             });
         }
 
-        category.description = undefined;
-
         req.category = category;
         next();
     })
@@ -22,22 +20,38 @@ exports.createCategory = (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array()[0].msg });
+      return res.status(400).json({ error: errors.array()[0].msg });
     }
     
-    const category = new Category(req.body);
-    category.save((err, ctgry) => {
-        if (err) {
-            return res.status(400).json({
-                error: "Unable to create to category"
-            });
-        }
+    Category.countDocuments({ name: req.body.name })
+        .then((count) => {
+            if (count) {
+                return res.status(400).json({ error: "Category already exist" });
+            } else {
+                const category = new Category(req.body);
+                category.save((err, ctgry) => {
+                    if (err) {
+                        return res.status(400).json({
+                            error: "Unable to create category"
+                        });
+                    }
 
-        return res.json({
-            mssg: 'Category created successfully'
-        });
-    });
+                    return res.json({
+                        mssg: 'Category created successfully'
+                    });
+                });
+            }
+        })
+        .catch(err => {
+            return res.status(500).json({
+                error: "Unable to access DB"
+            });
+    })
 }
+
+exports.getCategory = (req, res) => {
+  return res.json(req.category);
+};
 
 exports.getAllCategories = (req, res) => {
     
@@ -57,7 +71,7 @@ exports.updateCategory = (req, res) => {
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array()[0].msg });
+      return res.status(400).json({ error: errors.array()[0].msg });
     }
 
     Category.findByIdAndUpdate(req.category._id,
@@ -93,8 +107,7 @@ exports.removeCategory = (req, res) => {
     Product.find().exec((err, product) => {
     if (err) {
         return res.status(500).json({
-        mssg: "Server error",
-        error: err,
+        error: "Server error"
         });
     }
 
@@ -103,8 +116,7 @@ exports.removeCategory = (req, res) => {
         item.remove((err, updatedProduct) => {
             if (err) {
             return res.status(404).json({
-                mssg: "Unable to remove Product of given category",
-                error: err,
+                error: "Unable to remove Product of given category"     
             });
             }
         });
@@ -114,7 +126,7 @@ exports.removeCategory = (req, res) => {
 
         
       res.json({
-        mssg: "Successfully deleted",
+        error: "Successfully deleted",
       });
     });
 

@@ -5,37 +5,49 @@ const jwt = require("jsonwebtoken");
 const { expressjwt: expressJwt } = require("express-jwt");
 
 exports.signupUser = (req, res) => {
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array()[0].msg });
-    }
-
-  const user = new User(req.body);
-    user.save((err, user) => {
-      if (err) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ mssg: errors.array()[0].msg });
+  }
+  
+  console.log(req.body);
+  User.countDocuments({ email: req.body.email })
+    .then((count) => {
+      if (count) {
+        return res.status(400).json({ mssg: "User already exist. Try using other email" });
+      } else {
+        const user = new User(req.body);
+        user.save((err, user) => {
+          if (err) {
             return res.status(400).json({
               mssg: "Unable to signUp user",
-              error:err
+              error: err,
             });
-        }
+          }
 
-        const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
+          const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY);
 
-        res.cookie("token", token, { expire: new Date() + 9999 });
+          res.cookie("token", token, { expire: new Date() + 9999 });
 
-        const { _id, name, email } = user;
-        return res.json({ token, user: { _id, name, email } });
-      
-    });
-
+          const { _id, name, email } = user;
+          return res.json({ token, user: { _id, name, email } });
+        });
+      }
+    })
+    .catch((err) =>
+      res.status(400).json({
+        mssg: "Unable to access DB",
+        error: err,
+      })
+    );
 }
+
 
 
 exports.signinUser = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array()[0].msg });
+    return res.status(400).json({ error : errors.array()[0].msg });
   }
 
   const { email, password } = req.body;
