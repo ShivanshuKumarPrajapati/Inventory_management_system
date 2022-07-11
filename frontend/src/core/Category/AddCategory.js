@@ -116,9 +116,9 @@ const CreateCategory = () => {
               placeholder="Enter description"
               onChange={handleChange}
               required
-              className="CategoryInput w-full"
-              rows={4}
-            />
+              className="w-full"
+              rows="3"
+            ></textarea>
             <button type="submit" className="CategoryBtn" onClick={onSubmit}>
               Add category
             </button>

@@ -15,7 +15,7 @@ const Base = ({ children }) => {
   const currentTab = (path) => {
   
     if (location.pathname === path) {
-      return { color: "#fc402b", backgroundColor: "#4b4848" };
+      return { color: "#ff7869", backgroundColor: "#4b4848" };
     } else {
       return { color: "#FFFFFF" };
     }

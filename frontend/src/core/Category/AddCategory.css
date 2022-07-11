@@ -55,6 +55,11 @@
 }
 textarea{
     resize: none;
+    margin: 8px 2px;
+    font-size: large;
+    font-family: 'Times New Roman', Times, serif;
+    border-radius: 5px;
+    padding:4px;
 }
 
 @media screen and (max-width:950px) {

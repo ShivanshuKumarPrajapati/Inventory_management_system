@@ -45,7 +45,7 @@ const ProductCard = () => {
     return (
       products.map((product, index) => {
         return (
-          <div key={index} className="Card m-3">
+          <div key={index} className="Card m-7">
             <Image product={product} />
             <div className="flex mt-3 justify-end">
               <Link to={`/product/update/${product._id}`} className="mr-3 ">

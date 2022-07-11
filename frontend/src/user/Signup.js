@@ -41,9 +41,7 @@ const Signup = () => {
 
             setTimeout(() => {
               setData({
-                name: '',
-                email: '',
-                password:'',
+                ...data,
                 error:''
               })
             }, 3000);        

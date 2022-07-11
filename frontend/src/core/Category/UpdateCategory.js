@@ -41,7 +41,7 @@ const UpdateCategory = () => {
               setValues({ ...values, error: `${data.error}` });
 
               setTimeout(() => {
-                setValues({ error: ""});
+                setValues({...values, error: ""});
               }, 3000);
            }
            else {

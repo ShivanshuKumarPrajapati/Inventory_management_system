@@ -34,10 +34,10 @@ const Signin = () => {
         const { email, password } = data;
       signin({ email, password }).then(res => {
             if (res.error) {
-              setData({ ...data, error: `${res.error}`, loading: false,email:"",password:"" });
+              setData({ ...data, error: `${res.error}`, loading: false });
               
               setTimeout(() => {
-                setData({ error: "" });
+                setData({...data, error: "" });
               },3000)
             }
             else {
