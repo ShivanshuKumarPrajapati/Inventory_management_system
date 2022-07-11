@@ -39,34 +39,45 @@ const CategoryCard = () => {
   }, []);
 
 
+  const showCategory = () => {
+    return categories.map((category, index) => {
+      return (
+        <div key={index} className="categoryCard m-6">
+          <div className="categoryname w-full  h-1/3">{category.name}</div>
+          <div className="h-2/3">
+            <div className="flex mt-3 justify-end">
+              <Link to={`/category/update/${category._id}`}>
+                <FaEdit className="mr-3 " />
+              </Link>
+              <FaTrash
+                className="mr-2 btn-danger"
+                onClick={() => delCategory(category._id)}
+              />
+            </div>
+            <p className="mt-3 text-left ml-1 text-lg leading-3">
+              <span className="font-extrabold text-xl">Description : </span>
+              {category.description}
+            </p>
+          </div>
+        </div>
+      );
+    });
+  }
 
   return (
-    <div className="w-screen categoryCardParent mt-2">
-      {
-      categories.map((category, index) => {
-        return (
-          <div key={index} className="categoryCard m-6">
-            <div className="categoryname w-full  h-1/3">{category.name}</div>
-            <div className="h-2/3">
-              <div className="flex mt-3 justify-end">
-                <Link to={`/category/update/${category._id}`}>
-                  <FaEdit className="mr-3 " />
-                </Link>
-                <FaTrash
-                  className="mr-2 btn-danger"
-                  onClick={() => delCategory(category._id)}
-                />
-              </div>
-              <p className="mt-3 text-left ml-1 text-lg leading-3">
-                <span className="font-extrabold text-xl">Description : </span>
-                {category.description}
-              </p>
+      categories.length > 0 ? (
+        <div className="w-screen categoryCardParent mt-2">
+              {
+              showCategory()
+            }
             </div>
+      ) :
+        (
+          <div className='empty'>
+            <h1 className='font-extrabold'>No category FOUND</h1>
+          <p>Add Category to view</p>
           </div>
-        );
-      })
-    }
-    </div>
+        )  
   );
 }
 

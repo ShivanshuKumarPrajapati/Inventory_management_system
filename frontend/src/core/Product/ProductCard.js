@@ -41,10 +41,9 @@ const ProductCard = () => {
    }, []);
   
    
-  
-  return (
-    <div className="w-screen cardParent">
-      {products.map((product, index) => {
+  const showProduct = () => {
+    return (
+      products.map((product, index) => {
         return (
           <div key={index} className="Card m-3">
             <Image product={product} />
@@ -73,8 +72,23 @@ const ProductCard = () => {
             </p>
           </div>
         );
-    })}
-    </div>
+      })
+    )
+  }
+  
+  return (
+      products.length > 0 ? (     
+        <div className="w-screen cardParent">
+        {showProduct()}
+        </div>
+      )
+          :
+        (
+          <div className='empty'>
+            <h1 className='font-extrabold'>No product FOUND</h1>
+            <p>Add product to view</p>
+          </div>
+      )
   );
 }
 

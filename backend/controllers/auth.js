@@ -10,7 +10,6 @@ exports.signupUser = (req, res) => {
     return res.status(400).json({ mssg: errors.array()[0].msg });
   }
   
-  console.log(req.body);
   User.countDocuments({ email: req.body.email })
     .then((count) => {
       if (count) {

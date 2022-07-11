@@ -1,20 +1,21 @@
 import React from "react";
 import "./style.css";
-import { Link,useLocation } from "react-router-dom";
+import { Link,useLocation,useNavigate } from "react-router-dom";
 
 
 import { isAuthenticated } from "./auth/helper";
-
+import { signout } from "./auth/helper";
 
 
 const Base = ({ children }) => {
 
   const location = useLocation();
+  const navigate = useNavigate();
   
   const currentTab = (path) => {
   
     if (location.pathname === path) {
-      return { color: "#2ecc72", backgroundColor:"#4b4848"  };
+      return { color: "#fc402b", backgroundColor: "#4b4848" };
     } else {
       return { color: "#FFFFFF" };
     }
@@ -71,7 +72,16 @@ const Base = ({ children }) => {
                 Add Category
               </Link>
             </li>
-            <li className="flex-1 flex items-center justify-center">nav</li>
+            <li
+              className="flex-1 flex items-center justify-center"
+              onClick={() => {
+                signout(() => {
+                  navigate("/");
+                });
+              }}
+            >
+              Signout
+            </li>
           </ul>
         )}
       </div>

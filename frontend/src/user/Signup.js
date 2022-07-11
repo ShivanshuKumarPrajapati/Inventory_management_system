@@ -8,7 +8,7 @@ import {signup, authenticate,isAuthenticated} from './../auth/helper/index'
 
 const Signup = () => {
     const navigate = useNavigate();
-    const { user } = isAuthenticated();
+    
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -33,7 +33,6 @@ const Signup = () => {
       signup({ name, email, password })
         .then((res) => {
           if (res.mssg) {
-            console.log(res.mssg)
             setData({
               ...data,
               error: `${res.mssg}`,
@@ -62,7 +61,7 @@ const Signup = () => {
               });
             });
             
-
+            const { user } = isAuthenticated();
             setTimeout(() => {
               setData({
                 success: ""

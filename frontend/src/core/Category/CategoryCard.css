@@ -31,3 +31,13 @@
     justify-content: center;
     padding-top: 10px;
 }
+
+.empty{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size:larger;
+    font-family: Breeserif;
+    align-content: space-around;
+    justify-content: center;
+}

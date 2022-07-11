@@ -126,7 +126,7 @@ exports.removeCategory = (req, res) => {
 
         
       res.json({
-        error: "Successfully deleted",
+        mssg: "Successfully deleted",
       });
     });
 

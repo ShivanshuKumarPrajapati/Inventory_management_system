@@ -18,7 +18,7 @@ const Signin = () => {
      loading:false
    });
 
-  const { user } = isAuthenticated();
+ 
 
    const handleChange = (e) => {
      const name = e.target.name;
@@ -32,7 +32,7 @@ const Signin = () => {
         setData({ ...data, error: false, loading: true });
 
         const { email, password } = data;
-        signin({ email, password }).then(res => {
+      signin({ email, password }).then(res => {
             if (res.error) {
               setData({ ...data, error: `${res.error}`, loading: false,email:"",password:"" });
               
@@ -47,9 +47,11 @@ const Signin = () => {
                   email: ""
                 })
               });
-              if (user) {
-                navigate("/home/product");
-              }
+
+              const { user } = isAuthenticated();
+               if (user) {
+                 navigate("/home/product");
+               }
             }
         })
             .catch(err => {

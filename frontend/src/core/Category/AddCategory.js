@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AddCategory.css';
 
 import Base from '../../Base';
@@ -11,6 +12,7 @@ import { createCategory } from '../helper/categoryhelper';
 
 const CreateCategory = () => {
 
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         name: "",
         description: "",
@@ -38,8 +40,8 @@ const CreateCategory = () => {
         setValues({ ...values, error: `${data.error}` });
 
          setTimeout(() => {
-           setValues({ error: "",name:"",description:"" });
-         }, 3000);
+           setValues({ error: "" });
+         }, 2000);
       }
       else {
         setValues({
@@ -49,8 +51,9 @@ const CreateCategory = () => {
         });
 
         setTimeout(() => {
-          setValues({ success:false});
-        }, 3000);
+          setValues({ success: false });
+          navigate('/home/category')
+        }, 2000);
       }
     })
   }
